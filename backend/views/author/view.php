@@ -33,4 +33,20 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]) ?>
 
+    <table class="table">
+        <thead>
+        <th>#</th>
+        <th>Book's name</th>
+        </thead>
+        <tbody>
+        <?php $i = 0?>
+        <?php foreach ($model->authorBooks as $authorBook):?>
+            <tr>
+                <td><?= ++$i ?></td>
+                <td><?= $authorBook->book->name ?></td>
+            </tr>
+        <?php endforeach ?>
+        </tbody>
+    </table>
+
 </div>
