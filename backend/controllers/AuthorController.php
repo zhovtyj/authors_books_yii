@@ -3,9 +3,9 @@
 namespace backend\controllers;
 
 use Yii;
-use app\models\Author;
-use app\models\Book;
-use app\models\AuthorBook;
+use common\models\Author;
+use common\models\Book;
+use common\models\AuthorBook;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
