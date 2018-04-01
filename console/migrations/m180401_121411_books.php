@@ -12,8 +12,6 @@ class m180401_121411_books extends Migration
         $this->createTable('{{%books}}', [
             'id' => $this->primaryKey(),
             'name' => $this->string(255)->notNull(),
-            'created_at' => $this->integer()->notNull(),
-            'updated_at' => $this->integer()->notNull(),
         ]);
     }
 
