@@ -41,6 +41,7 @@ return [
             'showScriptName' => false,
             'rules' => [
                 '' => 'site/index',
+                'api/v1/books/<id:\d+>' => 'api/v1/books/view',
                 '<controller>/<action>' => '<controller>/<action>'
             ],
         ],
