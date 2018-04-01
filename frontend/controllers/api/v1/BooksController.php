@@ -3,12 +3,14 @@
 namespace frontend\controllers\api\v1;
 
 use common\models\Book;
+use Yii;
 
 class BooksController extends \yii\web\Controller
 {
     public function actions()
     {
-        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        Yii::$app->controller->enableCsrfValidation = false;
     }
 
     public function actionIndex($id = null)
@@ -20,9 +22,22 @@ class BooksController extends \yii\web\Controller
 
     public function actionView($id)
     {
-        $books = Book::find($id)->with('authorBooks')->asArray()->one();
+        if(Yii::$app->request->isPost){
 
-        return $books;
+            $book = Book::findOne($id);
+            $book->name = Yii::$app->request->post('name');
+            if($book->save()){
+                return ['success' => 'Book was updated successfully!'];
+            }else{
+                return ['error' => 'Book was not updated!'];
+            }
+
+
+        }
+
+        $book = Book::find($id)->with('authorBooks')->asArray()->one();
+
+        return $book;
     }
 
 }
