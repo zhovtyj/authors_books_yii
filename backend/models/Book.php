@@ -41,6 +41,7 @@ class Book extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'name' => 'Name',
+            'str_authors' => 'Authors',
         ];
     }
 
@@ -49,6 +50,6 @@ class Book extends \yii\db\ActiveRecord
      */
     public function getAuthorBooks()
     {
-        return $this->hasMany(AuthorBook::className(), ['book_id' => 'id']);
+        return $this->hasMany(AuthorBook::className(), ['book_id' => 'id'])->with('author');
     }
 }

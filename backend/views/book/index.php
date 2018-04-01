@@ -24,6 +24,15 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'id',
             'name',
+            [
+                'value' => function ($data) {
+                    $str = '';
+                    foreach($data->authorBooks as $request) {
+                        $str .= $request->author->name.', ';
+                    }
+                    return rtrim($str, ', ');
+                },
+            ],
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

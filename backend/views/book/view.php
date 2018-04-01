@@ -13,6 +13,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="book-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
+    <?php //var_dump($model->authorBooks)?>
 
     <p>
         <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
