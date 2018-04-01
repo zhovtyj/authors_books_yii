@@ -181,7 +181,7 @@ class AuthorController extends Controller
      */
     protected function findModel($id)
     {
-        if (($model = Author::findOne($id)) !== null) {
+        if (($model = Author::find($id)->with('authorBooks')->one()) !== null) {
             return $model;
         }
 
