@@ -38,7 +38,13 @@ class AuthorController extends Controller
     public function actionIndex()
     {
         $dataProvider = new ActiveDataProvider([
-            'query' => Author::find(),
+            'query' => Author::find()
+                ->select([
+                    '{{authors}}.*',
+                    'COUNT({{author_book}}.book_id) AS booksCount'
+                ])
+                ->joinWith('authorBooks')
+                ->groupBy('{{authors}}.id'),
         ]);
 
         return $this->render('index', [

@@ -24,6 +24,9 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'id',
             'name',
+            'booksCount',
+            //No lazy load
+            //'authorBooksCount',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

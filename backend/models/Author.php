@@ -14,6 +14,7 @@ use Yii;
  */
 class Author extends \yii\db\ActiveRecord
 {
+    public $booksCount;
     /**
      * @inheritdoc
      */
@@ -41,6 +42,8 @@ class Author extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'name' => 'Name',
+            'authorBooksCount' => 'Number of books',
+            'booksCount' => 'Number of books',
         ];
     }
 
@@ -50,5 +53,10 @@ class Author extends \yii\db\ActiveRecord
     public function getAuthorBooks()
     {
         return $this->hasMany(AuthorBook::className(), ['author_id' => 'id']);
+    }
+
+    public function getAuthorBooksCount()
+    {
+        return $this->getAuthorBooks()->count();
     }
 }
