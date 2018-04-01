@@ -10,6 +10,7 @@ use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
 
 /**
  * AuthorController implements the CRUD actions for Author model.
@@ -22,6 +23,16 @@ class AuthorController extends Controller
     public function behaviors()
     {
         return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'actions' => ['index', 'view', 'update', 'delete'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
+            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
@@ -181,7 +192,7 @@ class AuthorController extends Controller
      */
     protected function findModel($id)
     {
-        if (($model = Author::find($id)->with('authorBooks')->one()) !== null) {
+        if (($model = Author::findOne($id)) !== null) {
             return $model;
         }
 
