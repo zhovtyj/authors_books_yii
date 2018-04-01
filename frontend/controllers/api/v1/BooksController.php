@@ -31,8 +31,14 @@ class BooksController extends \yii\web\Controller
             }else{
                 return ['error' => 'Book was not updated!'];
             }
-
-
+        }
+        if(Yii::$app->request->isDelete){
+            $book = Book::findOne($id);
+            if($book->delete()){
+                return ['success' => 'Book was deleted successfully!'];
+            }else{
+                return ['error' => 'Book was not deleted!'];
+            }
         }
 
         $book = Book::find($id)->with('authorBooks')->asArray()->one();
