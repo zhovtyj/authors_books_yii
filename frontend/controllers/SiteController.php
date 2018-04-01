@@ -12,6 +12,7 @@ use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
 use frontend\models\ContactForm;
+use common\models\Author;
 
 
 /**
@@ -73,9 +74,9 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        //$authors = Author::find()->all();
+        $authors = Author::find()->with('authorBooks')->all();
         return $this->render('index', [
-            //'authors' => $authors
+            'authors' => $authors
         ]);
     }
 
