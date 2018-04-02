@@ -93,16 +93,18 @@ class AuthorController extends Controller
              * $model->link('authorBooks', Yii::$app->request->post('Author')['authorBooks']);
              */
             $books = Yii::$app->request->post('authorBooks');
-            foreach ($books as $book_id){
-                //$book = Book::findOne($book_id);
-                //$model->link('authorBooks', $book);
-                $authorBook = new AuthorBook();
-                $authorBook->author_id = $model->id;
-                $authorBook->book_id = $book_id;
-                // TODO - clarify if framework can write timestamp by himself
-                $authorBook->created_at = time();
-                $authorBook->updated_at = time();
-                $authorBook->save();
+            if($books){
+                foreach ($books as $book_id){
+                    //$book = Book::findOne($book_id);
+                    //$model->link('authorBooks', $book);
+                    $authorBook = new AuthorBook();
+                    $authorBook->author_id = $model->id;
+                    $authorBook->book_id = $book_id;
+                    // TODO - clarify if framework can write timestamp by himself
+                    $authorBook->created_at = time();
+                    $authorBook->updated_at = time();
+                    $authorBook->save();
+                }
             }
 
             return $this->redirect(['view', 'id' => $model->id]);
@@ -138,13 +140,15 @@ class AuthorController extends Controller
             AuthorBook::deleteAll(['author_id'=> $model->id]);
 
             $books = Yii::$app->request->post('authorBooks');
-            foreach ($books as $book_id){
-                $authorBook = new AuthorBook();
-                $authorBook->author_id = $model->id;
-                $authorBook->book_id = $book_id;
-                $authorBook->created_at = time();
-                $authorBook->updated_at = time();
-                $authorBook->save();
+            if($books){
+                foreach ($books as $book_id){
+                    $authorBook = new AuthorBook();
+                    $authorBook->author_id = $model->id;
+                    $authorBook->book_id = $book_id;
+                    $authorBook->created_at = time();
+                    $authorBook->updated_at = time();
+                    $authorBook->save();
+                }
             }
             return $this->redirect(['view', 'id' => $model->id]);
         }
