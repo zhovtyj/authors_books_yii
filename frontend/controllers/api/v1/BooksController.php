@@ -38,7 +38,7 @@ class BooksController extends \yii\web\Controller
                 return ['success' => 'Book was deleted successfully!'];
             }else{
                 return ['error' => 'Book was not deleted!'];
-                
+
             }
         }
 

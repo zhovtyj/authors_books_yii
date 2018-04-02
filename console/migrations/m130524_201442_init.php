@@ -1,6 +1,7 @@
 <?php
 
 use yii\db\Migration;
+use common\models\User;
 
 class m130524_201442_init extends Migration
 {
@@ -24,6 +25,20 @@ class m130524_201442_init extends Migration
             'created_at' => $this->integer()->notNull(),
             'updated_at' => $this->integer()->notNull(),
         ], $tableOptions);
+
+        $this->createDefaultUser();
+    }
+
+    private function createDefaultUser()
+    {
+        $user = new User();
+        $user->username = 'admin';
+        $user->auth_key = 'key';
+        $user->password_hash = \Yii::$app->getSecurity()->generatePasswordHash('123456');
+        $user->email = 'admin@admin.com';
+        $user->created_at = time();
+        $user->updated_at = time();
+        $user->save();
     }
 
     public function down()
