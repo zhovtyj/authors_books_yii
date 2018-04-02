@@ -42,9 +42,15 @@ class BooksController extends \yii\web\Controller
             }
         }
 
-        $book = Book::find($id)->with('authorBooks')->asArray()->one();
+        $book = Book::find()->where(['id' => $id])->with('authorBooks')->asArray()->one();
 
-        return $book;
+        if($book){
+            return $book;
+        }
+        else{
+            return ['error' => 'No Books were found!'];
+        }
+
     }
 
 }
