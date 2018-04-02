@@ -19,7 +19,7 @@ use kartik\select2\Select2;
     <?= Select2::widget([
         'name' => 'authorBooks',
         'data' => $books,
-        'value' => $selected_books,
+        'value' => isset($selected_books)?$selected_books:[],
         'options' => [
             'placeholder' => 'Select books',
             'multiple' => true
