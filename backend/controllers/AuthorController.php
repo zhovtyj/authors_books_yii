@@ -11,6 +11,7 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
+use yii\helpers\ArrayHelper;
 
 /**
  * AuthorController implements the CRUD actions for Author model.
@@ -110,17 +111,13 @@ class AuthorController extends Controller
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
-        $books = Book::find()->select(['id', 'name'])->all();
-
         //Create array for Selectize
-        foreach ($books as $book){
-            $arr_books[$book->id] = $book->name;
-        }
+        $arrBooks = ArrayHelper::map(Book::find()->select(['id', 'name'])->all(), 'id', 'name');
 
 
         return $this->render('create', [
             'model' => $model,
-            'books' => $arr_books,
+            'books' => $arrBooks,
         ]);
     }
 
