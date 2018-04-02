@@ -25,18 +25,23 @@ class BooksController extends \yii\web\Controller
         if(Yii::$app->request->isPost){
 
             $book = Book::findOne($id);
+            if(!$book){
+                return ['error' => 'No Books were found!'];
+            }
             $book->name = Yii::$app->request->post('name');
             if($book->save()){
                 return ['success' => 'Book was updated successfully!'];
-            }else{
+            }
+            else{
                 return ['error' => 'Book was not updated!'];
             }
         }
         if(Yii::$app->request->isDelete){
             $book = Book::findOne($id);
-            if($book->delete()){
+            if($book && $book->delete()){
                 return ['success' => 'Book was deleted successfully!'];
-            }else{
+            }
+            else{
                 return ['error' => 'Book was not deleted!'];
 
             }
